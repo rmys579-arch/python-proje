@@ -36,3 +36,24 @@ def dosyaları_sınıflandır (dizin_adresi):
      alınacak_adres = os.path.join(dizin_adresi, tip_adı)
 
      # atanacak hedef bir klasor olmdığı için  klasör oluşturma kısmı
+     # kullanılacak fonksiyonlar = os.make.dirs() klasor oluşturuyo
+     # hedef klasör yok başta kontrol edip sonra oluşturuyorum.
+     if not os.path.exists(alınacak_adres):
+      os.makedirs(alınacak_adres)
+     else:
+      os.makedirs(alınacak_adres)
+      
+      
+    # dosyaların bulunduğu yeri ayırıp klasörlemiş oldum. Şimdi taşıma kısmında kullanılacak fonksiyonlar
+    #shutil.move(nereden alınacağı ,nereye gideceği ) alınan dosyayı başka bir yere taşıyor.
+  #taşınıp taşınmama durumunda bilgi vermek için try except kullanıp sonra printliyoruz 
+     
+ 
+ 
+     try: 
+    
+       shutil.move(alınacak_adres,hedef_yol)
+       print ("Taşıma işlemi gerçekleştirilmiştir." , "dosya_adı" , " ,"  ,  "tip_adı", "klasörüne taşındı. " )
+     except:
+      print("HATA!!!")
+      
