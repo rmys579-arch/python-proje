@@ -69,6 +69,7 @@ def görevleri_yükle():
 # Aşağıda direkt dosyayı açma işlemini yazıcam dosya içeriği hatalı olması durumunda kontrol edebilmek için
 #yine try except ile yazıyorum....
 
+<<<<<<< HEAD
   try:
    with open(görev_dosyası,"r")as file:
     görevler=json.load(file)
@@ -91,3 +92,8 @@ def görevleri_kaydet(görevler):
  except Exception:
   print("Hata!!!! Görevler kaydedilemedi")
   #####
+=======
+try:
+   
+  
+>>>>>>> b0ffdf4a1d662c14cd7cf7603e535a319d01ee7e
