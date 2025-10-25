@@ -13,7 +13,7 @@ tipler = {
 def dosyanın_tipi (uzantı):
  "" # dosyanın ismini küçük harfe çevir !!!!!!! .pdf ve .PDF in  aynı tipte olması için yapıyoruz
  uzantı = uzantı.lower() 
- for tip_adı , uzantılar in uzantı:
+ for tip_adı , uzantılar in tipler.items():
   if uzantı in uzantılar:
    return tip_adı
   else:
