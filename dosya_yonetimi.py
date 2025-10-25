@@ -69,4 +69,25 @@ def görevleri_yükle():
 # Aşağıda direkt dosyayı açma işlemini yazıcam dosya içeriği hatalı olması durumunda kontrol edebilmek için
 #yine try except ile yazıyorum....
 
-try:
+  try:
+   with open(görev_dosyası,"r")as file:
+    görevler=json.load(file)
+    print(f"işlem başarıldı. Görevler {görev_dosyası} dosyasından yüklendi")
+    return görevler
+  
+  except Exception :
+   print("Hata!!! Boş dosya döndürülüyor.")
+   return []
+
+
+ # görevleri kaydetme partı burayı da hata önlemek için try except ile yazıyoruz
+def görevleri_kaydet(görevler):
+ try:
+   with open(görev_dosyası , "w")as file:
+  #jsondump()  fonksiyonu veriyi alıp onu JSON formatına dönüştüyor yazdığımız verieri bu formata
+  #getirmek için kullanıyoruz...
+    json.dump(görevler, file)
+   print(f"Görevler {görev_dosyası} dosyasına kaydedilmiştir... ")
+ except Exception:
+  print("Hata!!!! Görevler kaydedilemedi")
+  #####
