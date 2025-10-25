@@ -33,15 +33,15 @@ def dosyaları_sınıflandır (dizin_adresi):
      # aşağıda dosyanın ismini ve uzantısınnı ayırıyoruz 
      isim, uzantı = os.path.splitext(dosya_adı)
      tip_adı = dosyanın_tipi(uzantı)
-     alınacak_adres = os.path.join(dizin_adresi, tip_adı)
+     hedef_yol = os.path.join(dizin_adresi, tip_adı)
 
      # atanacak hedef bir klasor olmdığı için  klasör oluşturma kısmı
      # kullanılacak fonksiyonlar = os.make.dirs() klasor oluşturuyo
      # hedef klasör yok başta kontrol edip sonra oluşturuyorum.
-     if not os.path.exists(alınacak_adres):
-      os.makedirs(alınacak_adres)
+     if not os.path.exists(hedef_yol):
+      os.makedirs(hedef_yol)
      else:
-      os.makedirs(alınacak_adres)
+      os.makedirs(hedef_yol)
       
       
     # dosyaların bulunduğu yeri ayırıp klasörlemiş oldum. Şimdi taşıma kısmında kullanılacak fonksiyonlar
