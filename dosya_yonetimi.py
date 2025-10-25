@@ -1,6 +1,7 @@
 
 import os # dosyayı silmemiz yeniden adlandıramız veya sınıflandırmamız için 
 import shutil # dosyaları taşımak için 
+import json #uygulama kapandığında verilerin kaybolmaması için gerekli!!
 # sınıflandırma (sözlük) partı
 tipler = {   
     "Belge": [ ".pdf" , ".docx" , ".txt" , ],   
@@ -56,4 +57,16 @@ def dosyaları_sınıflandır (dizin_adresi):
        print ("Taşıma işlemi gerçekleştirilmiştir." , dosya_adı , " ,"  ,  tip_adı, "klasörüne taşındı. " )
      except:
       print("HATA!!!")
-      
+
+#görevleri yükleme partı...
+görev_dosyası = "görevler.json"
+def görevleri_yükle():
+# uygulama ilk çalıştığında görev dosyası yok o yüzden:
+  if not os.path.exists(görev_dosyası):
+    print("görev dosyası yoktur.Boş liste döndürülmektedir. ")
+    return []
+  
+# Aşağıda direkt dosyayı açma işlemini yazıcam dosya içeriği hatalı olması durumunda kontrol edebilmek için
+#yine try except ile yazıyorum....
+
+try:
