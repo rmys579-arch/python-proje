@@ -27,7 +27,7 @@ def dosyanın_tipi (uzantı):
 def dosyaları_sınıflandır (dizin_adresi):
   for dosya_adı in os.list(dizin_adresi):
     "" # ögelerin adlarını döngü ile listelemiş oldum ......
-    alınacak_adres = os.path.join(dizin_adresi, dosya_)
+    alınacak_adres = os.path.join(dizin_adresi, dosya_adı)
     #alınanın dosya olduğundan emin olmak için     ... buray silebiliriz de ?
     if os.path.isfile(alınacak_adres):
      # aşağıda dosyanın ismini ve uzantısınnı ayırıyoruz 
