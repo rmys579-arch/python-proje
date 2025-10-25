@@ -33,7 +33,7 @@ def main():
             mevcut_gorevler=otomatik_temizlik(mevcut_gorevler)
         elif choose=="5":
             print("EXİTİNG THE PROGRAM...")
-            BREAK 
+            break
         else:
             print("INVALID CHOİCE , PLEASE TRY AGAIN")
 if __name__ == "__main__":

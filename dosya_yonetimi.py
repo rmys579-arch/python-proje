@@ -11,51 +11,42 @@ tipler = {
 }
 
 #Dosyanın tipini bulalım
-def dosyanın_tipini_bul (uzantı):
- "" # dosyanın ismini küçük harfe çevir !!!!!!! .pdf ve .PDF in  aynı tipte olması için yapıyoruz
- uzantı = uzantı.lower() 
- for tip_adı , uzantılar in tipler.items():
-  if uzantı in uzantılar:
-   return tip_adı
-  else:
-   return "diğer"
+def dosyanın_tipini_bul(uzantı):
+  """Dosya uzantısını küçük harfe çevirip tipini döndürür. Eğer bulunamazsa 'diğer' döner."""
+  uzantı = uzantı.lower()
+  for tip_adı, uzantılar in tipler.items():
+    if uzantı in uzantılar:
+      return tip_adı
+  return "diğer"
   
 
 # verilecek dizin ( dosyaların bulunduğu yer)deki dosyaları uzatılarına göre klasörleyelim
 # kullanacağım fonksiyonlar =     os.path.join() bu fonksiyon verilen klasör 
 # adresi ile dosyanın adını birleştiriyor 
 # ve tek tam adres oluşturur.
-def dosyaları_sınıflandır (dizin_adresi):
+def dosyaları_sınıflandır(dizin_adresi='.'):
+    """Verilen dizindeki dosyaları uzantılarına göre klasörlere taşır. Varsayılan olarak çalışma dizini kullanılır."""
   for dosya_adı in os.listdir(dizin_adresi):
-    "" # ögelerin adlarını döngü ile listelemiş oldum ......
+    # dosyanın tam yolunu oluştur
     alınacak_adres = os.path.join(dizin_adresi, dosya_adı)
-    #alınanın dosya olduğundan emin olmak için     ... buray silebiliriz de ?
-    if os.path.isfile(alınacak_adres):
-     # aşağıda dosyanın ismini ve uzantısınnı ayırıyoruz 
-     isim, uzantı = os.path.splitext(dosya_adı)
-     tip_adı = dosyanın_tipini_bul(uzantı)
-     hedef_yol = os.path.join(dizin_adresi, tip_adı)
 
-     # atanacak hedef bir klasor olmdığı için  klasör oluşturma kısmı
-     # kullanılacak fonksiyonlar = os.make.dirs() klasor oluşturuyo
-     # hedef klasör yok başta kontrol edip sonra oluşturuyorum.
-     if not os.path.exists(hedef_yol):
-      os.makedirs(hedef_yol)
-     
-      
-      
-    # dosyaların bulunduğu yeri ayırıp klasörlemiş oldum. Şimdi taşıma kısmında kullanılacak fonksiyonlar
-    #shutil.move(nereden alınacağı ,nereye gideceği ) alınan dosyayı başka bir yere taşıyor.
-    #taşınıp taşınmama durumunda bilgi vermek için "try-except"kullanıp sonra printliyoruz 
-     
- 
- 
-     try: 
-    
-       shutil.move(alınacak_adres,hedef_yol)
-       print ("Taşıma işlemi gerçekleştirilmiştir." , dosya_adı , " ,"  ,  tip_adı, "klasörüne taşındı. " )
-     except:
-      print("HATA!!!")
+    # sadece dosyalarla ilgileniyoruz
+    if os.path.isfile(alınacak_adres):
+      # dosya adını ve uzantısını ayır
+      isim, uzantı = os.path.splitext(dosya_adı)
+      tip_adı = dosyanın_tipini_bul(uzantı)
+      hedef_yol = os.path.join(dizin_adresi, tip_adı)
+
+      # hedef klasörü oluştur (yoksa)
+      if not os.path.exists(hedef_yol):
+        os.makedirs(hedef_yol)
+
+      # taşıma işlemi
+      try:
+        shutil.move(alınacak_adres, hedef_yol)
+        print("Taşıma işlemi gerçekleştirilmiştir.", dosya_adı, ",", tip_adı, "klasörüne taşındı.")
+      except Exception as e:
+        print("HATA!!!", e)
 
 #görevleri yükleme partı...
 görev_dosyası = "görevler.json"
@@ -81,12 +72,11 @@ def görevleri_yükle():
 
  # görevleri kaydetme partı burayı da hata önlemek için try except ile yazıyoruz
 def görevleri_kaydet(görevler):
- try:
-   with open(görev_dosyası , "w")as file:
-  #jsondump()  fonksiyonu veriyi alıp onu JSON formatına dönüştüyor yazdığımız verieri bu formata
-  #getirmek için kullanıyoruz...
-    json.dump(görevler, file)
-   print(f"Görevler {görev_dosyası} dosyasına kaydedilmiştir... ")
- except Exception:
-  print("Hata!!!! Görevler kaydedilemedi")
+    try:
+        with open(görev_dosyası, "w") as file:
+            # json.dump() veriyi JSON formatına dönüştürür ve dosyaya yazar
+            json.dump(görevler, file, ensure_ascii=False, indent=2)
+        print(f"Görevler {görev_dosyası} dosyasına kaydedilmiştir...")
+    except Exception as e:
+        print("Hata!!!! Görevler kaydedilemedi", e)
   #####
