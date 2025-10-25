@@ -19,3 +19,20 @@ def dosyanın_tipi (uzantı):
   else:
    return "diğer"
   
+
+# verilecek dizin ( dosyaların bulunduğu yer)deki dosyaları uzatılarına göre klasörleyelim
+# kullanacağım fonksiyonlar =     os.path.join() bu fonksiyon verilen klasör 
+# adresi ile dosyanın adını birleştiriyor 
+# ve tek tam adres oluşturur.
+def dosyaları_sınıflandır (dizin_adresi):
+  for dosya_adı in os.list(dizin_adresi):
+    "" # ögelerin adlarını döngü ile listelemiş oldum ......
+    alınacak_adres = os.path.join(dizin_adresi, dosya_)
+    #alınanın dosya olduğundan emin olmak için     ... buray silebiliriz de ?
+    if os.path.isfile(alınacak_adres):
+     # aşağıda dosyanın ismini ve uzantısınnı ayırıyoruz 
+     isim, uzantı = os.path.splitext(dosya_adı)
+     tip_adı = dosyanın_tipi(uzantı)
+     alınacak_adres = os.path.join(dizin_adresi, tip_adı)
+
+     # atanacak hedef bir klasor olmdığı için  klasör oluşturma kısmı
