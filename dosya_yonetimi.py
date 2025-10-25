@@ -10,7 +10,7 @@ tipler = {
 }
 
 #Dosyanın tipini bulalım
-def dosyanın_tipi (uzantı):
+def dosyanın_tipini_bul (uzantı):
  "" # dosyanın ismini küçük harfe çevir !!!!!!! .pdf ve .PDF in  aynı tipte olması için yapıyoruz
  uzantı = uzantı.lower() 
  for tip_adı , uzantılar in tipler.items():
@@ -25,14 +25,14 @@ def dosyanın_tipi (uzantı):
 # adresi ile dosyanın adını birleştiriyor 
 # ve tek tam adres oluşturur.
 def dosyaları_sınıflandır (dizin_adresi):
-  for dosya_adı in os.list(dizin_adresi):
+  for dosya_adı in os.listdir(dizin_adresi):
     "" # ögelerin adlarını döngü ile listelemiş oldum ......
     alınacak_adres = os.path.join(dizin_adresi, dosya_adı)
     #alınanın dosya olduğundan emin olmak için     ... buray silebiliriz de ?
     if os.path.isfile(alınacak_adres):
      # aşağıda dosyanın ismini ve uzantısınnı ayırıyoruz 
      isim, uzantı = os.path.splitext(dosya_adı)
-     tip_adı = dosyanın_tipi(uzantı)
+     tip_adı = dosyanın_tipini_bul(uzantı)
      hedef_yol = os.path.join(dizin_adresi, tip_adı)
 
      # atanacak hedef bir klasor olmdığı için  klasör oluşturma kısmı
