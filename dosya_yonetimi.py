@@ -41,8 +41,7 @@ def dosyaları_sınıflandır (dizin_adresi):
      # hedef klasör yok başta kontrol edip sonra oluşturuyorum.
      if not os.path.exists(hedef_yol):
       os.makedirs(hedef_yol)
-     else:
-      os.makedirs(hedef_yol)
+     
       
       
     # dosyaların bulunduğu yeri ayırıp klasörlemiş oldum. Şimdi taşıma kısmında kullanılacak fonksiyonlar
