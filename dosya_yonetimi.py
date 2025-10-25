@@ -70,3 +70,5 @@ def görevleri_yükle():
 #yine try except ile yazıyorum....
 
 try:
+   
+  
