@@ -46,7 +46,7 @@ def dosyaları_sınıflandır (dizin_adresi):
       
     # dosyaların bulunduğu yeri ayırıp klasörlemiş oldum. Şimdi taşıma kısmında kullanılacak fonksiyonlar
     #shutil.move(nereden alınacağı ,nereye gideceği ) alınan dosyayı başka bir yere taşıyor.
-  #taşınıp taşınmama durumunda bilgi vermek için try except kullanıp sonra printliyoruz 
+    #taşınıp taşınmama durumunda bilgi vermek için "try-except"kullanıp sonra printliyoruz 
      
  
  
