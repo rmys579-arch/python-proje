@@ -53,7 +53,7 @@ def dosyaları_sınıflandır (dizin_adresi):
      try: 
     
        shutil.move(alınacak_adres,hedef_yol)
-       print ("Taşıma işlemi gerçekleştirilmiştir." , "dosya_adı" , " ,"  ,  "tip_adı", "klasörüne taşındı. " )
+       print ("Taşıma işlemi gerçekleştirilmiştir." , dosya_adı , " ,"  ,  tip_adı, "klasörüne taşındı. " )
      except:
       print("HATA!!!")
       
