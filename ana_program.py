@@ -1,9 +1,9 @@
 from dosya_yonetimi import dosyaları_sınıflandır
 from gorev_islemleri import (
+  gorev_ekle ,
   gorevleri_goster,
-  gorev_ekle,
   gorevi_tamamla,
-  otomatik_temizlik  
+  otomatik_temizlik
 )
 def main_menu():
     print("MAİN MENU")
