@@ -1,6 +1,7 @@
 
 # Tarih işlemleri için datetime modülünü içeri aktarıyorum
 from datetime import datetime
+from dosya_yonetimi import dosya_tipini_bul
 
 # Dosyaya kaydetme işlevi 'dosya_yonetimi'nden geliyordu, onu da import ediyorum.
 # (Burada varsayımsal olarak görevleri_kaydet fonksiyonunun dosya_yonetimi.py'de olduğunu kabul ettim)
@@ -113,3 +114,18 @@ def otomatik_temizlik(gorevler):
     görevleri_kaydet(gorevler)
     print("Tamamlanan görevler silindi")
 #görevi tamamla/otomatik temizlik
+
+
+
+def gorevleri_goster(gorevler):
+    if not gorevler:
+        print("görev listesi boş.")
+        return
+    print("\n ---CURRENT TASKS---")
+    for i, g in  enumerate(gorevler,start=1):
+        durum="✅" if g [ "tamamlandı"] else "❌"
+        son_tarih=g.get("son_tarih, no date") #son_tarih yoksa no date yazdırır
+        oncelik=g.get("öncelik", "priority not set") #öncelik yoksa priority no set yazdırır
+        print (f"{i} - {g["isim"]} | Due : {son_tarih} | priority:{oncelik} | Status:{durum}")
+        
+            
