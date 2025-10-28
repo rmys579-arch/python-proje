@@ -12,10 +12,10 @@ def main_menu():
     print("3.COMPLETE A TASK")
     print("4.AUTOMATİC CLEAN UP ")
     print("5.EXIT")
-    return input( "please chose an option (1-5):") # return'den gelen cevabı fonksyona gönderip bir görev seçeceğiz
+    return input( "please choose an option (1-5):") # return'den gelen cevabı fonksiyona gönderip bir görev seçeceğiz
 def main():
     """ ana program akışını belirleyeceğiz
-    diğer modüllerden aktarılan fonksyonları birleştireceğiz
+    diğer modüllerden aktarılan fonksiyonları birleştireceğiz
     """
     mevcut_gorevler= dosyaları_sınıflandır()
     while True:
