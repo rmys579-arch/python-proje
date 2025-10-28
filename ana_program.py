@@ -26,7 +26,7 @@ def main():
             gorevleri_goster(mevcut_gorevler)
         elif choose=="2":
             new_task=input("PLEASE ENTER THE TASK YOU WANT TO ADD:")
-            gorev_ekle(mevcut_gorevler, new_task)
+            gorev_ekle(new_task)
         elif choose=="3":
             gorevi_tamamla(mevcut_gorevler)
         elif choose=="4":
