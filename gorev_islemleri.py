@@ -86,3 +86,30 @@ def gorev_ekle(mevcut_gorevler):
 # 
 # elif choose=="2":
 #     gorev_ekle(mevcut_gorevler)
+
+from dosya_yonetimi import görevleri_kaydet
+
+def gorevi_tamamla(gorevler):
+    if not gorevler:
+        print("Hiç görev yok.")
+        return
+    no = input("Tamamlanan görevin numarası: ")
+    # Girilen sayı görev numaraları arasında mı?
+    if no >= 1 and no <= len(gorevler):
+            gorevler[no - 1]["tamamlandı"] = True
+            görevleri_kaydet(gorevler)
+            print("Görev tamamlandı ✅")
+    else:
+            print("Geçersiz numara!")
+else:
+print("Lütfen bir sayı girin!")
+def otomatik_temizlik(gorevler):
+    yeni_liste = []
+    for g in gorevler:
+        if g["tamamlandı"] == False: #tamamlanmayan görevleri yeni listeye ekler
+            yeni_liste.append(g)
+    
+    gorevler[:] = yeni_liste #Eski listeyi yenisiyle değiştirir
+    görevleri_kaydet(gorevler)
+    print("Tamamlanan görevler silindi")
+#görevi tamamla/otomatik temizlik
