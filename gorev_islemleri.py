@@ -69,7 +69,7 @@ def gorev_ekle(mevcut_gorevler):
     }
     
     # 5. Ana Görev Listesine Ekliyorum
-    mevcut_gorevler.append(int(yeni_gorev))
+    mevcut_gorevler.append(str(yeni_gorev))
     
     # 6. Değişiklikleri JSON dosyasına kaydediyorum
     try:
