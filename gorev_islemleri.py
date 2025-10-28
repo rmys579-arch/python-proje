@@ -124,7 +124,7 @@ def gorevleri_goster(gorevler):
         return
     print("\n ---CURRENT TASKS---")
     for i, g in  enumerate(gorevler,start=1):
-        durum="✅" if g [ "tamamlandı"] else "❌"
+        durum="✅"  if g [ "tamamlandı"]else "❌"
         son_tarih=g.get("son_tarih, no date") #son_tarih yoksa no date yazdırır
         oncelik=g.get("öncelik", "priority not set") #öncelik yoksa priority no set yazdırır
         print (f"{i} - {g["isim"]} | Due : {son_tarih} | priority:{oncelik} | Status:{durum}")
