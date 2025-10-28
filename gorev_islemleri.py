@@ -1,7 +1,7 @@
 
 # Tarih işlemleri için datetime modülünü içeri aktarıyorum
 from datetime import datetime
-from dosya_yonetimi import dosya_tipini_bul
+from dosya_yonetimi import dosyanın_tipini_bul
 
 # Dosyaya kaydetme işlevi 'dosya_yonetimi'nden geliyordu, onu da import ediyorum.
 # (Burada varsayımsal olarak görevleri_kaydet fonksiyonunun dosya_yonetimi.py'de olduğunu kabul ettim)
@@ -94,16 +94,17 @@ def gorevi_tamamla(gorevler):
     if not gorevler:
         print("Hiç görev yok.")
         return
-    no = input("Tamamlanan görevin numarası: ")
-    # Girilen sayı görev numaraları arasında mı?
-    if no >= 1 and no <= len(gorevler):
+    try:
+        no = int(input("Tamamlanan görevin numarası: "))
+        # Girilen sayı görev numaraları arasında mı?
+        if 1 <= no <= len(gorevler):
             gorevler[no - 1]["tamamlandı"] = True
             görevleri_kaydet(gorevler)
             print("Görev tamamlandı ✅")
-    else:
+        else:
             print("Geçersiz numara!")
-else:
-print("Lütfen bir sayı girin!")
+    except ValueError:
+        print("Lütfen bir sayı girin!")
 def otomatik_temizlik(gorevler):
     yeni_liste = []
     for g in gorevler:
