@@ -84,13 +84,6 @@ def gorev_ekle(mevcut_gorevler):
         print("NOTE: Kaydetme işlemi bir sonraki adımda (main.py'de) yapılmalıdır.")
 
     print("-" * 30)
-
-# NOT: Bu kodu kullanabilmek için main.py dosyasındaki 
-# 'elif choose=="2":' bloğunu şu şekilde değiştirmemiz gerekiyor:
-# 
-# elif choose=="2":
-#     gorev_ekle(mevcut_gorevler)
-
 from dosya_yonetimi import görevleri_kaydet
 
 def gorevi_tamamla(gorevler):
