@@ -1,4 +1,4 @@
-from dosya_yonetimi import dosyaları_sınıflandır
+from dosya_yonetimi import görevleri_yükle
 from gorev_islemleri import (
   gorev_ekle ,
   gorevleri_goster,
@@ -17,7 +17,7 @@ def main():
     """ ana program akışını belirleyeceğiz
     diğer modüllerden aktarılan fonksiyonları birleştireceğiz
     """
-    mevcut_gorevler= dosyaları_sınıflandır()
+    mevcut_gorevler = görevleri_yükle()
     while True:
         choose = main_menu()
         if choose =="1":
@@ -25,12 +25,11 @@ def main():
             # Görevlerin güncel halini ona parametre olarak verir.
             gorevleri_goster(mevcut_gorevler)
         elif choose=="2":
-            new_task=input("PLEASE ENTER THE TASK YOU WANT TO ADD:")
             gorev_ekle(mevcut_gorevler)
         elif choose=="3":
             gorevi_tamamla(mevcut_gorevler)
         elif choose=="4":
-            otomatik_temizlik(mevcut_gorevler)
+            mevcut_gorevler=otomatik_temizlik(mevcut_gorevler)
         elif choose=="5":
             print("EXİTİNG THE PROGRAM...")
             break

@@ -27,8 +27,8 @@ def dosyanın_tipini_bul(uzantı):
 def dosyaları_sınıflandır(dizin_adresi='.'):
     """Verilen dizindeki dosyaları uzantılarına göre klasörlere taşır. Varsayılan olarak çalışma dizini kullanılır."""
     for dosya_adı in os.listdir(dizin_adresi):
-    # dosyanın tam yolunu oluştur
-     alınacak_adres = os.path.join(dizin_adresi, dosya_adı)
+        # dosyanın tam yolunu oluştur
+        alınacak_adres = os.path.join(dizin_adresi, dosya_adı)
 
     # sadece dosyalarla ilgileniyoruz
     if os.path.isfile(alınacak_adres):

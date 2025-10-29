@@ -1,0 +1,14 @@
+[
+  {
+    "isim": "d",
+    "tamamlandı": false,
+    "son_tarih": null,
+    "öncelik": "Orta"
+  },
+  {
+    "isim": "ders",
+    "tamamlandı": true,
+    "son_tarih": null,
+    "öncelik": "Orta"
+  }
+]

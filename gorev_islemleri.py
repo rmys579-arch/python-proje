@@ -69,7 +69,10 @@ def gorev_ekle(mevcut_gorevler):
     }
     
     # 5. Ana Görev Listesine Ekliyorum
-    mevcut_gorevler.append(yeni_gorev)
+    if isinstance(mevcut_gorevler, list):
+        mevcut_gorevler.append(yeni_gorev)
+    else:
+        mevcut_gorevler = [yeni_gorev]
     
     # 6. Değişiklikleri JSON dosyasına kaydediyorum
     try:
@@ -125,7 +128,7 @@ def gorevleri_goster(gorevler):
     print("\n ---CURRENT TASKS---")
     for i, g in  enumerate(gorevler,start=1):
         durum="✅"  if g [ "tamamlandı"]else "❌"
-        son_tarih=g.get("son_tarih, no date") #son_tarih yoksa no date yazdırır
+        son_tarih=g.get("son_tarih", "no date") #son_tarih yoksa no date yazdırır
         oncelik=g.get("öncelik", "priority not set") #öncelik yoksa priority no set yazdırır
         print (f"{i} - {g["isim"]} | Due : {son_tarih} | priority:{oncelik} | Status:{durum}")
         
