@@ -30,7 +30,7 @@ def main():
         elif choose=="3":
             gorevi_tamamla(mevcut_gorevler)
         elif choose=="4":
-            mevcut_gorevler=otomatik_temizlik(mevcut_gorevler)
+            otomatik_temizlik(mevcut_gorevler)
         elif choose=="5":
             print("EXİTİNG THE PROGRAM...")
             break
