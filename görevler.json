@@ -10,5 +10,11 @@
     "tamamlandı": true,
     "son_tarih": null,
     "öncelik": "Orta"
+  },
+  {
+    "isim": "calculating",
+    "tamamlandı": false,
+    "son_tarih": null,
+    "öncelik": "Orta"
   }
 ]
