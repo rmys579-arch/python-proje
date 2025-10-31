@@ -44,16 +44,16 @@ def dosyaları_sınıflandır(dizin_adresi='.'):
       # taşıma işlemi
       try:
         shutil.move(alınacak_adres, hedef_yol)
-        print("Taşıma işlemi gerçekleştirilmiştir.", dosya_adı, ",", tip_adı, "klasörüne taşındı.")
+        print("The move has been completed.", dosya_adı, ",", tip_adı, "moved to folder.")
       except Exception as e:
-        print("HATA!!!", e)
+        print("ERROR!!!", e)
 
 #görevleri yükleme partı...
 görev_dosyası = "görevler.json"
 def görevleri_yükle():
 # uygulama ilk çalıştığında görev dosyası yok o yüzden:
   if not os.path.exists(görev_dosyası):
-    print("görev dosyası yoktur.Boş liste döndürülmektedir. ")
+    print("There is no task file. An empty list is returned.")
     return []
   
 # Aşağıda direkt dosyayı açma işlemini yazıcam dosya içeriği hatalı olması durumunda kontrol edebilmek için
@@ -62,11 +62,11 @@ def görevleri_yükle():
   try:
    with open(görev_dosyası,"r")as file:
     görevler=json.load(file)
-    print(f"işlem başarıldı. Görevler {görev_dosyası} dosyasından yüklendi")
+    print(f"Operation successful. Tasks {görev_dosyası} loaded from file")
     return görevler
   
   except Exception :
-   print("Hata!!! Boş dosya döndürülüyor.")
+   print("Error!!! Empty file is returned.")
    return []
 
 
@@ -76,7 +76,7 @@ def görevleri_kaydet(görevler):
         with open(görev_dosyası, "w") as file:
             # json.dump() veriyi JSON formatına dönüştürür ve dosyaya yazar
             json.dump(görevler, file, ensure_ascii=False, indent=2)
-        print(f"Görevler {görev_dosyası} dosyasına kaydedilmiştir...")
+        print(f"Tasks {görev_dosyası} saved in file...")
     except Exception as e:
-        print("Hata!!!! Görevler kaydedilemedi", e)
+        print("Error!!!! Quests could not be saved", e)
   #####
