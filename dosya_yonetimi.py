@@ -50,7 +50,7 @@ def classify_files(directory_address='.'):
 
 #görevleri yükleme partı...
 task_file = "tasks.json"
-def görevleri_yükle():
+def load_tasks():
 # uygulama ilk çalıştığında görev dosyası yok o yüzden:
   if not os.path.exists(task_file):
     print("There is no task file. An empty list is returned.")
