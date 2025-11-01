@@ -6,14 +6,14 @@ from dosya_yonetimi import dosyanın_tipini_bul
 # Dosyaya kaydetme işlevi 'dosya_yonetimi'nden geliyordu, onu da import ediyorum.
 # (Burada varsayımsal olarak görevleri_kaydet fonksiyonunun dosya_yonetimi.py'de olduğunu kabul ettim)
 try:
-    from dosya_yonetimi import görevleri_kaydet
+    from dosya_yonetimi import classify_files
 except ImportError:
     # Eğer bu import hata verirse, main.py'nin kaydetme işlemini yapmasını bekleyeceğiz.
     # Ancak stabilite için burada olması daha iyi.
     print("WARNING: Could not load save_tasks function from dosya_yonetimi. Saving must be done in main.py.")
     # Bu durumda, gorev_ekle fonksiyonunun sonunda kaydetme işlemini yapmayız.
 
-def gorev_ekle(mevcut_gorevler):
+def add_tasks(mevcut_gorevler):
     """
     Kullanıcıdan yeni bir görevin detaylarını alarak (isim, son tarih, öncelik)
     mevcut görevler listesine ekler ve dosyaya kaydeder.
@@ -61,7 +61,7 @@ def gorev_ekle(mevcut_gorevler):
             print("INVALID PRIORITY CHOICE. PLEASE SELECT FROM THE LIST.")
 
     # 4. Yeni Görev Sözlüğünü Oluşturuyorum
-    yeni_gorev = {
+    new_task = {
         "name": gorev_adi,
         "completed": False, # Yeni görevler başlangıçta her zaman False
         "due_date": son_tarih_str,
@@ -70,9 +70,9 @@ def gorev_ekle(mevcut_gorevler):
     
     # 5. Ana Görev Listesine Ekliyorum
     if isinstance(mevcut_gorevler, list):
-        mevcut_gorevler.append(yeni_gorev)
+        mevcut_gorevler.append(new_task)
     else:
-        mevcut_gorevler = [yeni_gorev]
+        mevcut_gorevler = [new_task]
     
     # 6. Değişiklikleri JSON dosyasına kaydediyorum
     try:
@@ -86,7 +86,7 @@ def gorev_ekle(mevcut_gorevler):
     print("-" * 30)
 from dosya_yonetimi import görevleri_kaydet
 
-def gorevi_tamamla(gorevler):
+def completed_task(gorevler):
     if not gorevler:
         print("There are no missions.")
         return
@@ -101,7 +101,7 @@ def gorevi_tamamla(gorevler):
             print(" Invalid task number!")
     except ValueError:
         print("Please enter a valid number!")
-def otomatik_temizlik(gorevler):
+def automatic_clean_up(gorevler):
     yeni_liste = []
     for g in gorevler:
         if g["completed"] == False: #tamamlanmayan görevleri yeni listeye ekler
@@ -114,7 +114,7 @@ def otomatik_temizlik(gorevler):
 
 
 
-def gorevleri_goster(gorevler):
+def show_the_tasks(gorevler):
     if not gorevler:
         print("Task list is empty.")
         return

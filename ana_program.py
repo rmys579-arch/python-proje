@@ -1,9 +1,9 @@
-from dosya_yonetimi import görevleri_yükle
+from dosya_yonetimi import classify_files 
 from gorev_islemleri import (
-  gorev_ekle ,
-  gorevleri_goster,
-  gorevi_tamamla,
-  otomatik_temizlik
+  add_tasks, 
+  show_the_tasks,
+  completed_task,
+  automatic_clean_up
 )
 def main_menu():
     print("MAİN MENU")
@@ -17,19 +17,19 @@ def main():
     """ ana program akışını belirleyeceğiz
     diğer modüllerden aktarılan fonksiyonları birleştireceğiz
     """
-    mevcut_gorevler = görevleri_yükle()
+    mevcut_gorevler = classify_files()
     while True:
         choose = main_menu()
         if choose =="1":
             # Kişi 2'nin 'gorevleri_goster' fonksiyonunu çağırır.
             # Görevlerin güncel halini ona parametre olarak verir.
-            gorevleri_goster(mevcut_gorevler)
+            show_the_tasks(mevcut_gorevler)
         elif choose=="2":
-            gorev_ekle(mevcut_gorevler)
+            add_tasks(mevcut_gorevler)
         elif choose=="3":
-            gorevi_tamamla(mevcut_gorevler)
+            completed_task(mevcut_gorevler)
         elif choose=="4":
-            mevcut_gorevler=otomatik_temizlik(mevcut_gorevler)
+            mevcut_gorevler=automatic_clean_up(mevcut_gorevler)
         elif choose=="5":
             print("EXİTİNG THE PROGRAM...")
             break

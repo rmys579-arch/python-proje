@@ -44,7 +44,7 @@ def classify_files(directory_address='.'):
       # taşıma işlemi
       try:
         shutil.move(source_address, target_path)
-        print("The move has been completed.", file_name , ",", type_namme , "moved to folder.")
+        print("The move has been completed.", file_name , ",", type_name , "moved to folder.")
       except Exception as e:
         print("ERROR!!!", e)
 
@@ -62,7 +62,7 @@ def load_tasks():
   try:
    with open(task_file,"r")as file:
     tasks=json.load(file)
-    print(f"Operation successful. Tasks {görev_dosyası} loaded from file")
+    print(f"Operation successful. Tasks {task_file} loaded from file")
     return tasks
   
   except Exception :
