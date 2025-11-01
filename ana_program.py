@@ -17,19 +17,19 @@ def main():
     """ ana program akışını belirleyeceğiz
     diğer modüllerden aktarılan fonksiyonları birleştireceğiz
     """
-    mevcut_gorevler = classify_files()
+    current_tasks = classify_files()
     while True:
         choose = main_menu()
         if choose =="1":
             # Kişi 2'nin 'gorevleri_goster' fonksiyonunu çağırır.
             # Görevlerin güncel halini ona parametre olarak verir.
-            show_the_tasks(mevcut_gorevler)
+            show_the_tasks(current_tasks)
         elif choose=="2":
-            add_tasks(mevcut_gorevler)
+            add_tasks(current_tasks)
         elif choose=="3":
-            completed_task(mevcut_gorevler)
+            completed_task(current_tasks)
         elif choose=="4":
-            mevcut_gorevler=automatic_clean_up(mevcut_gorevler)
+            current_tasks=automatic_clean_up(current_tasks)
         elif choose=="5":
             print("EXİTİNG THE PROGRAM...")
             break
