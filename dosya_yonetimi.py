@@ -3,7 +3,7 @@ import os # dosyayı silmemiz yeniden adlandıramız veya sınıflandırmamız i
 import shutil # dosyaları taşımak için 
 import json #uygulama kapandığında verilerin kaybolmaması için gerekli!!
 # sınıflandırma (sözlük) partı
-tipler = {   
+types = {   
     "Belge": [ ".pdf" , ".docx" , ".txt" , ],   
     "Görsel": [ ".jpg", ".jpeg", ".gif"   ],
     "Sunum" : [ ".pptx" , ".ppt", ".key",  ]
@@ -11,7 +11,7 @@ tipler = {
 }
 
 #Dosyanın tipini bulalım
-def dosyanın_tipini_bul(uzantı):
+def find_types_of_files(uzantı):
   """Dosya uzantısını küçük harfe çevirip tipini döndürür. Eğer bulunamazsa 'diğer' döner."""
   uzantı = uzantı.lower()
   for tip_adı, uzantılar in tipler.items():
