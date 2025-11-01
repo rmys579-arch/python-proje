@@ -43,16 +43,16 @@ def classify_files(directory_address='.'):
 
       # taşıma işlemi
       try:
-        shutil.move(alınacak_adres, hedef_yol)
-        print("The move has been completed.", dosya_adı, ",", tip_adı, "moved to folder.")
+        shutil.move(source_address, target_path)
+        print("The move has been completed.", file_name , ",", type_namme , "moved to folder.")
       except Exception as e:
         print("ERROR!!!", e)
 
 #görevleri yükleme partı...
-görev_dosyası = "görevler.json"
+task_file = "tasks.json"
 def görevleri_yükle():
 # uygulama ilk çalıştığında görev dosyası yok o yüzden:
-  if not os.path.exists(görev_dosyası):
+  if not os.path.exists(task_file):
     print("There is no task file. An empty list is returned.")
     return []
   
@@ -60,10 +60,10 @@ def görevleri_yükle():
 #yine try except ile yazıyorum....
 
   try:
-   with open(görev_dosyası,"r")as file:
-    görevler=json.load(file)
+   with open(task_file,"r")as file:
+    tasks=json.load(file)
     print(f"Operation successful. Tasks {görev_dosyası} loaded from file")
-    return görevler
+    return tasks
   
   except Exception :
    print("Error!!! Empty file is returned.")
@@ -71,11 +71,11 @@ def görevleri_yükle():
 
 
  # görevleri kaydetme partı burayı da hata önlemek için try except ile yazıyoruz
-def görevleri_kaydet(görevler):
+def save_tasks(tasks):
     try:
-        with open(görev_dosyası, "w") as file:
+        with open(task_file, "w") as file:
             # json.dump() veriyi JSON formatına dönüştürür ve dosyaya yazar
-            json.dump(görevler, file, ensure_ascii=False, indent=2)
+            json.dump(tasks, file, ensure_ascii=False, indent=2)
         print(f"Tasks {görev_dosyası} saved in file...")
     except Exception as e:
         print("Error!!!! Quests could not be saved", e)
