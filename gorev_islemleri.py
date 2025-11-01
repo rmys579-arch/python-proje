@@ -10,7 +10,7 @@ try:
 except ImportError:
     # Eğer bu import hata verirse, main.py'nin kaydetme işlemini yapmasını bekleyeceğiz.
     # Ancak stabilite için burada olması daha iyi.
-    print("UYARI: görevleri_kaydet fonksiyonu dosya_yonetimi'nden yüklenemedi. Kaydetme main.py'de yapılmalıdır.")
+    print("WARNING: Could not load save_tasks function from dosya_yonetimi. Saving must be done in main.py.")
     # Bu durumda, gorev_ekle fonksiyonunun sonunda kaydetme işlemini yapmayız.
 
 def gorev_ekle(mevcut_gorevler):
@@ -44,8 +44,8 @@ def gorev_ekle(mevcut_gorevler):
         son_tarih_str = None # Eğer boş bırakılırsa None yapıyorum
             
     # 3. Önceliği Alıyorum
-    oncelik_secenekleri = ["Yüksek", "Orta", "Düşük"]
-    oncelik = "Orta" # Varsayılan olarak 'Orta' belirliyorum
+    oncelik_secenekleri = ["High", "Medium", "Low"]
+    oncelik = "Medium" # Varsayılan olarak 'Orta' belirliyorum
     
     print(f"CHOOSE PRIORITY ({'/'.join(oncelik_secenekleri)}): ")
     while True:
@@ -62,14 +62,17 @@ def gorev_ekle(mevcut_gorevler):
 
     # 4. Yeni Görev Sözlüğünü Oluşturuyorum
     yeni_gorev = {
-        "isim": gorev_adi,
-        "tamamlandı": False, # Yeni görevler başlangıçta her zaman False
-        "son_tarih": son_tarih_str,
-        "öncelik": oncelik
+        "name": gorev_adi,
+        "completed": False, # Yeni görevler başlangıçta her zaman False
+        "due_date": son_tarih_str,
+        "priority": oncelik
     }
     
     # 5. Ana Görev Listesine Ekliyorum
-    mevcut_gorevler.append(str(yeni_gorev))
+    if isinstance(mevcut_gorevler, list):
+        mevcut_gorevler.append(yeni_gorev)
+    else:
+        mevcut_gorevler = [yeni_gorev]
     
     # 6. Değişiklikleri JSON dosyasına kaydediyorum
     try:
@@ -81,52 +84,45 @@ def gorev_ekle(mevcut_gorevler):
         print("NOTE: Kaydetme işlemi bir sonraki adımda (main.py'de) yapılmalıdır.")
 
     print("-" * 30)
-
-# NOT: Bu kodu kullanabilmek için main.py dosyasındaki 
-# 'elif choose=="2":' bloğunu şu şekilde değiştirmemiz gerekiyor:
-# 
-# elif choose=="2":
-#     gorev_ekle(mevcut_gorevler)
-
 from dosya_yonetimi import görevleri_kaydet
 
 def gorevi_tamamla(gorevler):
     if not gorevler:
-        print("Hiç görev yok.")
+        print("There are no missions.")
         return
     try:
-        no = int(input("Tamamlanan görevin numarası: "))
+        no = int(input("Number of completed task: "))
         # Girilen sayı görev numaraları arasında mı?
         if 1 <= no <= len(gorevler):
-            gorevler[no - 1]["tamamlandı"] = True
+            gorevler[no - 1]["completed"] = True
             görevleri_kaydet(gorevler)
-            print("Görev tamamlandı ✅")
+            print("Mission completed ✅")
         else:
-            print("Geçersiz numara!")
+            print(" Invalid task number!")
     except ValueError:
-        print("Lütfen bir sayı girin!")
+        print("Please enter a valid number!")
 def otomatik_temizlik(gorevler):
     yeni_liste = []
     for g in gorevler:
-        if g["tamamlandı"] == False: #tamamlanmayan görevleri yeni listeye ekler
+        if g["completed"] == False: #tamamlanmayan görevleri yeni listeye ekler
             yeni_liste.append(g)
     
     gorevler[:] = yeni_liste #Eski listeyi yenisiyle değiştirir
     görevleri_kaydet(gorevler)
-    print("Tamamlanan görevler silindi")
+    print("completed tasks deleted")
 #görevi tamamla/otomatik temizlik
 
 
 
 def gorevleri_goster(gorevler):
     if not gorevler:
-        print("görev listesi boş.")
+        print("Task list is empty.")
         return
     print("\n ---CURRENT TASKS---")
     for i, g in  enumerate(gorevler,start=1):
-        durum="✅"  if g [ "tamamlandı"]else "❌"
-        son_tarih=g.get("son_tarih, no date") #son_tarih yoksa no date yazdırır
-        oncelik=g.get("öncelik", "priority not set") #öncelik yoksa priority no set yazdırır
+        durum="✅"  if g [ "completed"]else "❌"
+        son_tarih=g.get("due_date", "no date") #son_tarih yoksa no date yazdırır
+        oncelik=g.get("priority", "priority not set") #öncelik yoksa priority no set yazdırır
         print (f"{i} - {g["isim"]} | Due : {son_tarih} | priority:{oncelik} | Status:{durum}")
         
             
