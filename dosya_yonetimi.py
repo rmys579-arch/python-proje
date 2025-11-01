@@ -11,7 +11,7 @@ types = {
 }
 
 #Dosyanın tipini bulalım
-def find_types_of_files(uzantı):
+def find_file_type(uzantı):
   """Dosya uzantısını küçük harfe çevirip tipini döndürür. Eğer bulunamazsa 'diğer' döner."""
   uzantı = uzantı.lower()
   for tip_adı, uzantılar in tipler.items():
