@@ -4,20 +4,20 @@ import shutil # dosyaları taşımak için
 import json #uygulama kapandığında verilerin kaybolmaması için gerekli!!
 # sınıflandırma (sözlük) partı
 types = {   
-    "Belge": [ ".pdf" , ".docx" , ".txt" , ],   
-    "Görsel": [ ".jpg", ".jpeg", ".gif"   ],
-    "Sunum" : [ ".pptx" , ".ppt", ".key",  ]
+    "Document": [ ".pdf" , ".docx" , ".txt" , ],   
+    "Image": [ ".jpg", ".jpeg", ".gif"   ],
+    "Presentation" : [ ".pptx" , ".ppt", ".key",  ]
 
 }
 
 #Dosyanın tipini bulalım
-def find_file_type(uzantı):
+def find_file_type(extension):
   """Dosya uzantısını küçük harfe çevirip tipini döndürür. Eğer bulunamazsa 'diğer' döner."""
-  uzantı = uzantı.lower()
-  for tip_adı, uzantılar in tipler.items():
-    if uzantı in uzantılar:
-      return tip_adı
-  return "diğer"
+  extension = extension.lower()
+  for type_name, extensions in types.items():
+    if extension in extensions:
+      return type_name
+  return "other"
   
 
 # verilecek dizin ( dosyaların bulunduğu yer)deki dosyaları uzatılarına göre klasörleyelim
