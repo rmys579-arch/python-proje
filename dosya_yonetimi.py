@@ -76,7 +76,7 @@ def save_tasks(tasks):
         with open(task_file, "w") as file:
             # json.dump() veriyi JSON formatına dönüştürür ve dosyaya yazar
             json.dump(tasks, file, ensure_ascii=False, indent=2)
-        print(f"Tasks {görev_dosyası} saved in file...")
+        print(f"Tasks {task_file} saved in file...")
     except Exception as e:
         print("Error!!!! Quests could not be saved", e)
   #####
