@@ -24,22 +24,22 @@ def find_file_type(extension):
 # kullanacağım fonksiyonlar =     os.path.join() bu fonksiyon verilen klasör 
 # adresi ile dosyanın adını birleştiriyor 
 # ve tek tam adres oluşturur.
-def dosyaları_sınıflandır(dizin_adresi='.'):
+def classify_files(directory_address='.'):
     """Verilen dizindeki dosyaları uzantılarına göre klasörlere taşır. Varsayılan olarak çalışma dizini kullanılır."""
-    for dosya_adı in os.listdir(dizin_adresi):
+    for file_name in os.listdir(directory_address):
         # dosyanın tam yolunu oluştur
-        alınacak_adres = os.path.join(dizin_adresi, dosya_adı)
+        source_address = os.path.join(directory_address, file_name)
 
     # sadece dosyalarla ilgileniyoruz
-    if os.path.isfile(alınacak_adres):
+    if os.path.isfile(source_address):
       # dosya adını ve uzantısını ayır
-      isim, uzantı = os.path.splitext(dosya_adı)
-      tip_adı = dosyanın_tipini_bul(uzantı)
-      hedef_yol = os.path.join(dizin_adresi, tip_adı)
+      name , extension = os.path.splitext(file_name)
+      type_name = find_file_type(extension)
+      target_path = os.path.join(directory_address, type_name)
 
       # hedef klasörü oluştur (yoksa)
-      if not os.path.exists(hedef_yol):
-        os.makedirs(hedef_yol)
+      if not os.path.exists(target_path):
+        os.makedirs(target_path)
 
       # taşıma işlemi
       try:
