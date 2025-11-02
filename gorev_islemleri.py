@@ -76,7 +76,7 @@ def add_tasks(current_tasks):
     
     # 6. Değişiklikleri JSON dosyasına kaydediyorum
     try:
-        görevleri_kaydet(mevcut_gorevler) 
+        completed_task(mevcut_gorevler) 
         print(f"\n✅ TASK SUCCESSFULLY ADDED: '{gorev_adi}' (Priority: {oncelik})")
     except NameError:
         # Eğer görevleri_kaydet import edilemediyse veya main.py'de çağrılacaksa kullanıcıyı bilgilendiriyorum.
@@ -95,7 +95,7 @@ def completed_task(gorevler):
         # Girilen sayı görev numaraları arasında mı?
         if 1 <= no <= len(gorevler):
             gorevler[no - 1]["completed"] = True
-            görevleri_kaydet(gorevler)
+            completed_task(gorevler)
             print("Mission completed ✅")
         else:
             print(" Invalid task number!")
@@ -108,7 +108,7 @@ def automatic_clean_up(gorevler):
             yeni_liste.append(g)
     
     gorevler[:] = yeni_liste #Eski listeyi yenisiyle değiştirir
-    görevleri_kaydet(gorevler)
+    completed_task(gorevler)
     print("completed tasks deleted")
 #görevi tamamla/otomatik temizlik
 
