@@ -1,7 +1,7 @@
 
 # Tarih işlemleri için datetime modülünü içeri aktarıyorum
 from datetime import datetime
-from dosya_yonetimi import find_file_type
+from file_management import find_file_type
 
 # Dosyaya kaydetme işlevi 'dosya_yonetimi'nden geliyordu, onu da import ediyorum.
 # (Burada varsayımsal olarak görevleri_kaydet fonksiyonunun dosya_yonetimi.py'de olduğunu kabul ettim)
@@ -51,7 +51,7 @@ def add_tasks(current_tasks):
     while True:
         choice = input("YOUR CHOICE (Default is Orta): ").strip().capitalize()
         
-        if secim in oncelik_secenekleri:
+        if choice in priority_options:
             priority = choice
             break
         elif not choice:
@@ -84,7 +84,7 @@ def add_tasks(current_tasks):
         print("NOTE: Kaydetme işlemi bir sonraki adımda (main.py'de) yapılmalıdır.")
 
     print("-" * 30)
-from dosya_yonetimi import completed_task
+from file_management import completed_task
 
 def completed_task(gorevler):
     if not gorevler:

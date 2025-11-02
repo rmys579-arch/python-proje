@@ -1,5 +1,5 @@
-from dosya_yonetimi import classify_files 
-from gorev_islemleri import (
+from file_management import classify_files 
+from task_operations import (
   add_tasks, 
   show_the_tasks,
   completed_task,
