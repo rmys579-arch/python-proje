@@ -77,10 +77,10 @@ def add_tasks(current_tasks):
     # 6. Değişiklikleri JSON dosyasına kaydediyorum
     try:
         completed_task(mevcut_gorevler) 
-        print(f"\n✅ TASK SUCCESSFULLY ADDED: '{gorev_adi}' (Priority: {oncelik})")
+        print(f"\n✅ TASK SUCCESSFULLY ADDED: '{task_name}' (Priority: {priority})")
     except NameError:
         # Eğer görevleri_kaydet import edilemediyse veya main.py'de çağrılacaksa kullanıcıyı bilgilendiriyorum.
-        print(f"\n✅ TASK SUCCESSFULLY ADDED: '{gorev_adi}' (Priority: {oncelik})")
+        print(f"\n✅ TASK SUCCESSFULLY ADDED: '{task_name}' (Priority: {priority})")
         print("NOTE: Kaydetme işlemi bir sonraki adımda (main.py'de) yapılmalıdır.")
 
     print("-" * 30)
