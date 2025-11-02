@@ -1,19 +1,19 @@
 
 # Tarih işlemleri için datetime modülünü içeri aktarıyorum
 from datetime import datetime
-from dosya_yonetimi import dosyanın_tipini_bul
+from dosya_yonetimi import find_file_type
 
 # Dosyaya kaydetme işlevi 'dosya_yonetimi'nden geliyordu, onu da import ediyorum.
 # (Burada varsayımsal olarak görevleri_kaydet fonksiyonunun dosya_yonetimi.py'de olduğunu kabul ettim)
 try:
-    from dosya_yonetimi import classify_files
+    from file_management import classify_files
 except ImportError:
     # Eğer bu import hata verirse, main.py'nin kaydetme işlemini yapmasını bekleyeceğiz.
     # Ancak stabilite için burada olması daha iyi.
     print("WARNING: Could not load save_tasks function from dosya_yonetimi. Saving must be done in main.py.")
     # Bu durumda, gorev_ekle fonksiyonunun sonunda kaydetme işlemini yapmayız.
 
-def add_tasks(mevcut_gorevler):
+def add_tasks(current_tasks):
     """
     Kullanıcıdan yeni bir görevin detaylarını alarak (isim, son tarih, öncelik)
     mevcut görevler listesine ekler ve dosyaya kaydeder.
@@ -22,39 +22,39 @@ def add_tasks(mevcut_gorevler):
     
     # 1. Görev Adını 
     while True:
-        gorev_adi = input("ENTER TASK NAME (*): ").strip()
-        if gorev_adi:
+        task_name = input("ENTER TASK NAME (*): ").strip()
+        if task_name:
             break
         print("TASK NAME CANNOT BE EMPTY. PLEASE TRY AGAIN.")
         
     # 2. Son Teslim Tarihini 
-    son_tarih_str = input("ENTER DUE DATE (YYYY-MM-DD, Optional): ").strip()
+    due_date_str = input("ENTER DUE DATE (YYYY-MM-DD, Optional): ").strip()
     
     # Tarih formatını kontrol etme 
-    if son_tarih_str:
+    if due_date_str:
         try:
-            datetime.strptime(son_tarih_str, "%Y-%m-%d")
+            datetime.strptime(due_date_str, "%Y-%m-%d")
         except ValueError:
             print("WARNING: INVALID DATE FORMAT. TASK WILL BE ADDED WITHOUT A DUE DATE.")
-            son_tarih_str = None # Geçersizse None yapıyorum
+            due_date_str = None # Geçersizse None yapıyorum
         else:
             # Eğer tarih doğruysa, onu kullanmak için hazır bıraktım
             pass
     else:
-        son_tarih_str = None # Eğer boş bırakılırsa None yapıyorum
+        due_date_str = None # Eğer boş bırakılırsa None yapıyorum
             
     # 3. Önceliği Alıyorum
-    oncelik_secenekleri = ["High", "Medium", "Low"]
-    oncelik = "Medium" # Varsayılan olarak 'Orta' belirliyorum
+    priority_options = ["High", "Medium", "Low"]
+    priority = "Medium" # Varsayılan olarak 'Orta' belirliyorum
     
-    print(f"CHOOSE PRIORITY ({'/'.join(oncelik_secenekleri)}): ")
+    print(f"CHOOSE PRIORITY ({'/'.join(priority_options)}): ")
     while True:
-        secim = input("YOUR CHOICE (Default is Orta): ").strip().capitalize()
+        choice = input("YOUR CHOICE (Default is Orta): ").strip().capitalize()
         
         if secim in oncelik_secenekleri:
-            oncelik = secim
+            priority = choice
             break
-        elif not secim:
+        elif not choice:
             # Kullanıcı boş bırakırsa, varsayılan 'Orta' kalır ve döngüden çıkar
             break
         else:
@@ -62,10 +62,10 @@ def add_tasks(mevcut_gorevler):
 
     # 4. Yeni Görev Sözlüğünü Oluşturuyorum
     new_task = {
-        "name": gorev_adi,
+        "name": task_name,
         "completed": False, # Yeni görevler başlangıçta her zaman False
-        "due_date": son_tarih_str,
-        "priority": oncelik
+        "due_date": due_date_str,
+        "priority": priority
     }
     
     # 5. Ana Görev Listesine Ekliyorum
