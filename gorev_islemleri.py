@@ -84,7 +84,7 @@ def add_tasks(current_tasks):
         print("NOTE: Kaydetme işlemi bir sonraki adımda (main.py'de) yapılmalıdır.")
 
     print("-" * 30)
-from dosya_yonetimi import görevleri_kaydet
+from dosya_yonetimi import completed_task
 
 def completed_task(gorevler):
     if not gorevler:
