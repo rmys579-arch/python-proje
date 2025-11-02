@@ -33,7 +33,7 @@ def add_tasks(current_tasks):
     # Tarih formatını kontrol etme 
     if due_date_str:
         try:
-            datetime.strptime(due_date_str, "%Y-%m-%d")
+            datetime.strptime(due_date_str, "YY-mm-dd")
         except ValueError:
             print("WARNING: INVALID DATE FORMAT. TASK WILL BE ADDED WITHOUT A DUE DATE.")
             due_date_str = None # Geçersizse None yapıyorum
@@ -69,14 +69,14 @@ def add_tasks(current_tasks):
     }
     
     # 5. Ana Görev Listesine Ekliyorum
-    if isinstance(mevcut_gorevler, list):
-        mevcut_gorevler.append(new_task)
+    if isinstance(current_tasks, list):
+        current_tasks.append(new_task)
     else:
-        mevcut_gorevler = [new_task]
+        current_tasks = [new_task]
     
     # 6. Değişiklikleri JSON dosyasına kaydediyorum
     try:
-        completed_task(mevcut_gorevler) 
+        completed_task(current_tasks) 
         print(f"\n✅ TASK SUCCESSFULLY ADDED: '{task_name}' (Priority: {priority})")
     except NameError:
         # Eğer görevleri_kaydet import edilemediyse veya main.py'de çağrılacaksa kullanıcıyı bilgilendiriyorum.
@@ -86,43 +86,43 @@ def add_tasks(current_tasks):
     print("-" * 30)
 from file_management import completed_task
 
-def completed_task(gorevler):
-    if not gorevler:
+def completed_task(tasks):
+    if not tasks:
         print("There are no missions.")
         return
     try:
         no = int(input("Number of completed task: "))
         # Girilen sayı görev numaraları arasında mı?
-        if 1 <= no <= len(gorevler):
-            gorevler[no - 1]["completed"] = True
-            completed_task(gorevler)
+        if 1 <= no <= len(tasks):
+            tasks[no - 1]["completed"] = True
+            completed_task(tasks)
             print("Mission completed ✅")
         else:
             print(" Invalid task number!")
     except ValueError:
         print("Please enter a valid number!")
-def automatic_clean_up(gorevler):
-    yeni_liste = []
-    for g in gorevler:
+def automatic_clean_up(tasks):
+    new_list = []
+    for g in tasks:
         if g["completed"] == False: #tamamlanmayan görevleri yeni listeye ekler
-            yeni_liste.append(g)
+            new_list.append(g)
     
-    gorevler[:] = yeni_liste #Eski listeyi yenisiyle değiştirir
-    completed_task(gorevler)
+    tasks[:] = new_list #Eski listeyi yenisiyle değiştirir
+    completed_task(tasks)
     print("completed tasks deleted")
 #görevi tamamla/otomatik temizlik
 
 
 
-def show_the_tasks(gorevler):
-    if not gorevler:
+def show_the_tasks(tasks):
+    if not tasks:
         print("Task list is empty.")
         return
     print("\n ---CURRENT TASKS---")
-    for i, g in  enumerate(gorevler,start=1):
-        durum="✅"  if g [ "completed"]else "❌"
-        son_tarih=g.get("due_date", "no date") #son_tarih yoksa no date yazdırır
-        oncelik=g.get("priority", "priority not set") #öncelik yoksa priority no set yazdırır
-        print (f"{i} - {g["isim"]} | Due : {son_tarih} | priority:{oncelik} | Status:{durum}")
+    for i, g in  enumerate(tasks,start=1):
+        situation="✅"  if g [ "completed"]else "❌"
+        due_date=g.get("due_date", "no date") #son_tarih yoksa no date yazdırır
+        priority=g.get("priority", "priority not set") #öncelik yoksa priority no set yazdırır
+        print (f"{i} - {g["Name"]} | Due : {due_date} | Priority:{priority} | Status:{situation}")
         
             
