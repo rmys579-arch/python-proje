@@ -26,13 +26,11 @@ def add_tasks(current_tasks):
     # Tarih formatını kontrol etme 
     if due_date_str:
         try:
-            datetime.strptime(due_date_str, "YY-mm-dd")
+            # Beklenen format: YYYY-MM-DD
+            datetime.strptime(due_date_str, "%Y-%m-%d")
         except ValueError:
             print("WARNING: INVALID DATE FORMAT. TASK WILL BE ADDED WITHOUT A DUE DATE.")
             due_date_str = None # Geçersizse None yapıyorum
-        else:
-            # Eğer tarih doğruysa, onu kullanmak için hazır bıraktım
-            pass
     else:
         due_date_str = None # Eğer boş bırakılırsa None yapıyorum
             
@@ -111,9 +109,9 @@ def show_the_tasks(tasks):
         return
     print("\n ---CURRENT TASKS---")
     for i, g in  enumerate(tasks,start=1):
-        situation="✅"  if g [ "completed"]else "❌"
-        due_date=g.get("due_date", "no date") #son_tarih yoksa no date yazdırır
-        priority=g.get("priority", "priority not set") #öncelik yoksa priority no set yazdırır
-    print (f'{i} - {g["name"]} | Due : {due_date} | Priority:{priority} | Status:{situation}')
+        situation = "✅" if g["completed"] else "❌"
+        due_date = g.get("due_date", "no date") # son_tarih yoksa no date yazdırır
+        priority = g.get("priority", "priority not set") # öncelik yoksa priority not set yazdırır
+        print(f'{i} - {g["name"]} | Due : {due_date} | Priority:{priority} | Status:{situation}')
         
             

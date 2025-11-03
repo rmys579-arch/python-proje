@@ -29,23 +29,23 @@ def classify_files(directory_address='.'):
         # dosyanın tam yolunu oluştur
         source_address = os.path.join(directory_address, file_name)
 
-    # sadece dosyalarla ilgileniyoruz
-    if os.path.isfile(source_address):
-      # dosya adını ve uzantısını ayır
-      name , extension = os.path.splitext(file_name)
-      type_name = find_file_type(extension)
-      target_path = os.path.join(directory_address, type_name)
+        # sadece dosyalarla ilgileniyoruz
+        if os.path.isfile(source_address):
+            # dosya adını ve uzantısını ayır
+            name, extension = os.path.splitext(file_name)
+            type_name = find_file_type(extension)
+            target_path = os.path.join(directory_address, type_name)
 
-      # hedef klasörü oluştur (yoksa)
-      if not os.path.exists(target_path):
-        os.makedirs(target_path)
+            # hedef klasörü oluştur (yoksa)
+            if not os.path.exists(target_path):
+                os.makedirs(target_path)
 
-      # taşıma işlemi
-      try:
-        shutil.move(source_address, target_path)
-        print("The move has been completed.", file_name , ",", type_name , "moved to folder.")
-      except Exception as e:
-        print("ERROR!!!", e)
+            # taşıma işlemi
+            try:
+                shutil.move(source_address, target_path)
+                print("The move has been completed.", file_name, ",", type_name, "moved to folder.")
+            except Exception as e:
+                print("ERROR!!!", e)
 
 #görevleri yükleme partı...
 task_file = "tasks.json"
