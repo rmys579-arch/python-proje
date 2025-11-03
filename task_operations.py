@@ -3,15 +3,8 @@
 from datetime import datetime
 from file_management import find_file_type
 
-# Dosyaya kaydetme işlevi 'dosya_yonetimi'nden geliyordu, onu da import ediyorum.
-# (Burada varsayımsal olarak görevleri_kaydet fonksiyonunun dosya_yonetimi.py'de olduğunu kabul ettim)
-try:
-    from file_management import classify_files
-except ImportError:
-    # Eğer bu import hata verirse, main.py'nin kaydetme işlemini yapmasını bekleyeceğiz.
-    # Ancak stabilite için burada olması daha iyi.
-    print("WARNING: Could not load save_tasks function from dosya_yonetimi. Saving must be done in main.py.")
-    # Bu durumda, gorev_ekle fonksiyonunun sonunda kaydetme işlemini yapmayız.
+# Dosyaya kaydetme işlevi 'file_management' modülünden alınıyor
+from file_management import save_tasks
 
 def add_tasks(current_tasks):
     """
@@ -76,29 +69,27 @@ def add_tasks(current_tasks):
     
     # 6. Değişiklikleri JSON dosyasına kaydediyorum
     try:
-        completed_task(current_tasks) 
+        save_tasks(current_tasks)
         print(f"\n✅ TASK SUCCESSFULLY ADDED: '{task_name}' (Priority: {priority})")
-    except NameError:
-        # Eğer görevleri_kaydet import edilemediyse veya main.py'de çağrılacaksa kullanıcıyı bilgilendiriyorum.
+    except Exception:
         print(f"\n✅ TASK SUCCESSFULLY ADDED: '{task_name}' (Priority: {priority})")
-        print("NOTE: Kaydetme işlemi bir sonraki adımda (main.py'de) yapılmalıdır.")
+        print("NOTE: Kaydetme işlemi yapılamadı. Lütfen daha sonra kaydedin.")
 
     print("-" * 30)
-from file_management import completed_task
-
 def completed_task(tasks):
     if not tasks:
-        print("There are no missions.")
+        print("There are no tasks.")
         return
     try:
         no = int(input("Number of completed task: "))
         # Girilen sayı görev numaraları arasında mı?
         if 1 <= no <= len(tasks):
             tasks[no - 1]["completed"] = True
-            completed_task(tasks)
-            print("Mission completed ✅")
+            # save changes
+            save_tasks(tasks)
+            print("Task completed ✅")
         else:
-            print(" Invalid task number!")
+            print("Invalid task number!")
     except ValueError:
         print("Please enter a valid number!")
 def automatic_clean_up(tasks):
@@ -108,7 +99,7 @@ def automatic_clean_up(tasks):
             new_list.append(g)
     
     tasks[:] = new_list #Eski listeyi yenisiyle değiştirir
-    completed_task(tasks)
+    save_tasks(tasks)
     print("completed tasks deleted")
 #görevi tamamla/otomatik temizlik
 
@@ -123,6 +114,6 @@ def show_the_tasks(tasks):
         situation="✅"  if g [ "completed"]else "❌"
         due_date=g.get("due_date", "no date") #son_tarih yoksa no date yazdırır
         priority=g.get("priority", "priority not set") #öncelik yoksa priority no set yazdırır
-        print (f"{i} - {g["Name"]} | Due : {due_date} | Priority:{priority} | Status:{situation}")
+    print (f'{i} - {g["name"]} | Due : {due_date} | Priority:{priority} | Status:{situation}')
         
             

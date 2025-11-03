@@ -48,6 +48,14 @@ def classify_files(directory_address='.'):
       except Exception as e:
         print("ERROR!!!", e)
 
+    # After (optionally) classifying files, return the current task list if any.
+    # This makes classify_files() usable by main_management.py which expects a task list.
+    try:
+        return load_tasks()
+    except NameError:
+        # If load_tasks is not available for some reason, return an empty list
+        return []
+
 #görevleri yükleme partı...
 task_file = "tasks.json"
 def load_tasks():
