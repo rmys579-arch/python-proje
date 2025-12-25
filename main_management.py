@@ -1,4 +1,4 @@
-from file_management import classify_files 
+from file_management import classify_files, load_tasks
 from task_operations import (
   add_tasks, 
   show_the_tasks,
@@ -17,7 +17,8 @@ def main():
     """ ana program akışını belirleyeceğiz
     diğer modüllerden aktarılan fonksiyonları birleştireceğiz
     """
-    current_tasks = classify_files()
+    # Load persisted tasks from disk (classify_files is for file classification)
+    current_tasks = load_tasks()
     while True:
         choose = main_menu()
         if choose =="1":

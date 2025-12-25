@@ -1,3 +1,4 @@
+
 import os # dosyayı silmemiz yeniden adlandıramız veya sınıflandırmamız için 
 import shutil # dosyaları taşımak için 
 import json #uygulama kapandığında verilerin kaybolmaması için gerekli!!
@@ -29,23 +30,31 @@ def classify_files(directory_address='.'):
         # dosyanın tam yolunu oluştur
         source_address = os.path.join(directory_address, file_name)
 
-        # sadece dosyalarla ilgileniyoruz
-        if os.path.isfile(source_address):
-            # dosya adını ve uzantısını ayır
-            name, extension = os.path.splitext(file_name)
-            type_name = find_file_type(extension)
-            target_path = os.path.join(directory_address, type_name)
+    # sadece dosyalarla ilgileniyoruz
+    if os.path.isfile(source_address):
+      # dosya adını ve uzantısını ayır
+      name , extension = os.path.splitext(file_name)
+      type_name = find_file_type(extension)
+      target_path = os.path.join(directory_address, type_name)
 
-            # hedef klasörü oluştur (yoksa)
-            if not os.path.exists(target_path):
-                os.makedirs(target_path)
+      # hedef klasörü oluştur (yoksa)
+      if not os.path.exists(target_path):
+        os.makedirs(target_path)
 
-            # taşıma işlemi
-            try:
-                shutil.move(source_address, target_path)
-                print("The move has been completed.", file_name, ",", type_name, "moved to folder.")
-            except Exception as e:
-                print("ERROR!!!", e)
+      # taşıma işlemi
+      try:
+        shutil.move(source_address, target_path)
+        print("The move has been completed.", file_name , ",", type_name , "moved to folder.")
+      except Exception as e:
+        print("ERROR!!!", e)
+
+    # After (optionally) classifying files, return the current task list if any.
+    # This makes classify_files() usable by main_management.py which expects a task list.
+    try:
+        return load_tasks()
+    except NameError:
+        # If load_tasks is not available for some reason, return an empty list
+        return []
 
 #görevleri yükleme partı...
 task_file = "tasks.json"
@@ -78,3 +87,4 @@ def save_tasks(tasks):
         print(f"Tasks {task_file} saved in file...")
     except Exception as e:
         print("Error!!!! Quests could not be saved", e)
+  #####
